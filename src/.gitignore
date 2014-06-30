@@ -1,0 +1,6 @@
+Debug/
+Release/
+WinSerialPort.sdf
+WinSerialPort.suo
+*.vcxproj.filters
+*.vcxproj.user
