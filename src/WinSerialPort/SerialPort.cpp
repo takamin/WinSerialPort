@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#include <iostream>
 #include <time.h>
 #include "..\..\include\SerialPort.h"
 
@@ -35,14 +36,18 @@ bool SerialPort::Open(int timeout/* = 0*/)
 #endif
 		,NULL);
     if ( hRs232c == INVALID_HANDLE_VALUE ) {
-        printf("RS232C CreateFile Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C CreateFile Error" << endl;
+#endif
         return false;
     }
 
 
     // COMポートのセットアップ
     if (SetupComm(hRs232c,sizeof(RcvBuf),sizeof(SndBuf)) == FALSE){
-        printf("RS232C SetupComm Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C SetupComm Error" << endl;
+#endif
         return false;
     }
 	
@@ -58,7 +63,9 @@ bool SerialPort::Open(int timeout/* = 0*/)
     dcb.StopBits = (int)stopbits;
     dcb.ByteSize = databits;
     if (SetCommState(hRs232c,&dcb) == FALSE){
-        printf("RS232C SetCommState Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C SetCommState Error" << endl;
+#endif
         return false;
     }
 	COMMTIMEOUTS tmo;
@@ -67,7 +74,9 @@ bool SerialPort::Open(int timeout/* = 0*/)
 	tmo.WriteTotalTimeoutConstant = timeout;
 	tmo.WriteTotalTimeoutMultiplier = 0;
 	if(SetCommTimeouts(hRs232c, &tmo) == FALSE) {
-        printf("RS232C SetCommTimeouts Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C SetCommTimeouts Error" << endl;
+#endif
 		return false;
 	}
 
@@ -76,12 +85,16 @@ bool SerialPort::Open(int timeout/* = 0*/)
     memset(&ovRead,0,sizeof(ovRead));
     ovRead.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
     if (ovRead.hEvent == NULL){
-        printf("RS232C CreateEvent Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C CreateEvent Error" << endl;
+#endif
         return 0;
     }
     // COMポートの受信イベントマスク
     if (SetCommMask(hRs232c, EV_RXCHAR) == FALSE){
-        printf("RS232C SetCommMask Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C SetCommMask Error" << endl;
+#endif
         return 0;
     }
 #endif
@@ -111,7 +124,9 @@ int SerialPort::Write(const void* buf, int offset, int count)
 #endif
 
     if (WriteFile(hRs232c, &sendbuf[offset], count, &dwSize, pOverlapped) == FALSE) {
-        printf("RS232C WriteFile Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C WriteFile Error" << endl;
+#endif
         return 0;
     }
 	return (int)dwSize;
@@ -133,7 +148,9 @@ int SerialPort::Read(void* buf, int offset, int count)
         if (GetLastError() == ERROR_IO_PENDING) {
             GetOverlappedResult(hRs232c, pOverlapped, &dwTransfer, TRUE);
         }else{
-            printf("RS232C WaitCommEvent Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C WaitCommEvent Error" << endl;
+#endif
             return 0;
         }
     }
@@ -151,7 +168,9 @@ int SerialPort::Read(void* buf, int offset, int count)
 #endif
     // COMポートからデータ受信
     if(ReadFile(hRs232c, &recvbuf[offset], count, &dwSize, pOverlapped) == FALSE){
-        printf("RS232C ReadFile Error\n");
+#ifdef _DEBUG
+        cerr << "RS232C ReadFile Error" << endl;
+#endif
         return -1;
     }
 	if(count != 0 && dwSize == 0) {
