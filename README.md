@@ -6,6 +6,9 @@ WinSerialPort
 class SerialPort - The class to communicate by serial port
 implemented by VisualStudio 2010 Visual C++.
 
+* [SerialPort.h](https://github.com/takamin/WinSerialPort/blob/master/include/SerialPort.h)
+* [SerialPort.cpp](https://github.com/takamin/WinSerialPort/blob/master/src/WinSerialPort/SerialPort.cpp)
+
 ### public members
 
 #### constructor
