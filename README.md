@@ -6,7 +6,7 @@ C++ SerialPort class for Microsoft Visual C++.
 ## Source Files
 
 * [SerialPort.h](https://github.com/takamin/WinSerialPort/blob/master/SerialPort.h)
-* [SerialPort.cpp](https://github.com/takamin/WinSerialPort/blob/master/src/SerialPort.cpp)
+* [SerialPort.cpp](https://github.com/takamin/WinSerialPort/blob/master/SerialPort.cpp)
 
 ### Public Members
 
