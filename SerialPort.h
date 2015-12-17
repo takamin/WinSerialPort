@@ -17,6 +17,11 @@ public:
 		StopBitOnePointFive = 1,
 		StopBitTwo = 2,
 	};
+	enum FlowCtrl {
+		FlowCtrlNone = 0,
+		FlowCtrlXonXoff = 1,
+		FlowCtrlHardware = 2,
+	};
 public:
 	SerialPort(void);
 	virtual ~SerialPort(void);
@@ -27,6 +32,7 @@ public:
 	void SetParity(Parity parity) {this->parity = parity;}
 	void SetStopBits(StopBit stopbits) {this->stopbits = stopbits;}
 	void SetDataBits(int databits) {this->databits = databits;}
+	void SetFlowCtrl(FlowCtrl flowCtrl) { this->flowCtrl = flowCtrl; }
 
 	bool Open(int timeout = 0);
 	void Close();
@@ -43,6 +49,7 @@ private:
 	Parity parity;
 	StopBit stopbits;
 	int databits; // 4,5,6,7,8
+	FlowCtrl flowCtrl;
 	bool opened;
 
 	HANDLE hRs232c;
