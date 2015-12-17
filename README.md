@@ -1,21 +1,20 @@
 WinSerialPort
 =============
 
-## description
+C++ SerialPort class for Microsoft Visual C++.
 
-class SerialPort - The class to communicate by serial port
-implemented by VisualStudio 2010 Visual C++.
+## Source Files
 
-* [SerialPort.h](https://github.com/takamin/WinSerialPort/blob/master/include/SerialPort.h)
-* [SerialPort.cpp](https://github.com/takamin/WinSerialPort/blob/master/src/WinSerialPort/SerialPort.cpp)
+* [SerialPort.h](https://github.com/takamin/WinSerialPort/blob/master/SerialPort.h)
+* [SerialPort.cpp](https://github.com/takamin/WinSerialPort/blob/master/src/SerialPort.cpp)
 
-### public members
+### Public Members
 
-#### constructor
+#### Constructor
 
 * SerialPort();
 
-#### set / get conditions
+#### Set / Get conditions
 
 * void SetPortName(std::string portName);
 * void SetBaudrate(int baudrate);
@@ -24,18 +23,18 @@ implemented by VisualStudio 2010 Visual C++.
 * void SetStopBits(StopBit stopbits);
 * void SetDataBits(int databits);
 
-#### open / close
+#### Open / Close
 
 * bool Open(int timeout = 0);
 * void Close();
 * bool IsOpen() const;
 
-#### input / output
+#### Input / Output
 
-* int Read(void* buf, int offset, int count);
-* int Write(const void* buf, int offset, int count);
+* int Read(void\* buf, int offset, int count);
+* int Write(const void\* buf, int offset, int count);
 
-#### enum Parity
+#### Enumeration Values for Parity
 
 * ParityNone
 * ParityOdd
@@ -43,7 +42,7 @@ implemented by VisualStudio 2010 Visual C++.
 * ParityMark
 * ParitySpace
 
-#### enum StopBit
+#### Enumeration Values for StopBit
 
 * StopBitOne
 * StopBitOnePointFive

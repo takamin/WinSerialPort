@@ -1,7 +1,6 @@
-#include "StdAfx.h"
 #include <iostream>
 #include <time.h>
-#include "..\..\include\SerialPort.h"
+#include "SerialPort.h"
 
 using namespace std;
 
