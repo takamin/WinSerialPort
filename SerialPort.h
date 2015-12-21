@@ -6,16 +6,16 @@ class __declspec(dllexport) SerialPort
 {
 public:
 	enum Parity {
-		ParityNone = 0,
-		ParityOdd = 1,
-		ParityEven = 2,
-		ParityMark = 3,
-		ParitySpace = 4,
+		ParityNone = NOPARITY,
+		ParityOdd = ODDPARITY,
+		ParityEven = EVENPARITY,
+		ParityMark = MARKPARITY,
+		ParitySpace = SPACEPARITY,
 	};
 	enum StopBit {
-		StopBitOne = 0,
-		StopBitOnePointFive = 1,
-		StopBitTwo = 2,
+		StopBitOne = ONESTOPBIT,
+		StopBitOnePointFive = ONE5STOPBITS,
+		StopBitTwo = TWOSTOPBITS,
 	};
 public:
 	SerialPort(void);
