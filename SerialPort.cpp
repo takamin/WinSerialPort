@@ -11,6 +11,7 @@ SerialPort::SerialPort()
 	parity(ParityNone),
 	stopbits(StopBitOne),
 	databits(8),
+	flowCtrl(FlowCtrlNone),
 	hRs232c(INVALID_HANDLE_VALUE)
 {
 }
@@ -58,9 +59,33 @@ bool SerialPort::Open(int timeout/* = 0*/)
 
     // COMポートの設定変更
     dcb.BaudRate = baudrate;
+    dcb.fParity  = (parity == ParityNone) ? FALSE : TRUE;
     dcb.Parity   = (int)parity;
     dcb.StopBits = (int)stopbits;
     dcb.ByteSize = databits;
+
+	// Flow control
+	switch (this->flowCtrl) {
+		break;
+	case FlowCtrlXonXoff:
+		dcb.fInX = TRUE;
+		dcb.fOutX = TRUE;
+		dcb.XonChar = 0x11;
+		dcb.XoffChar = 0x13;
+		dcb.XonLim = 0;
+		dcb.XoffLim = 0;
+		break;
+	case FlowCtrlHardware:
+		dcb.fOutxCtsFlow = TRUE;
+		dcb.fRtsControl = RTS_CONTROL_HANDSHAKE;
+		dcb.XonLim = 0;
+		dcb.XoffLim = 0;
+		break;
+	case FlowCtrlNone:
+	default:
+		break;
+	}
+
     if (SetCommState(hRs232c,&dcb) == FALSE){
 #ifdef _DEBUG
         cerr << "RS232C SetCommState Error" << endl;
@@ -165,6 +190,14 @@ int SerialPort::Read(void* buf, int offset, int count)
 		return 0;
 	}
 #endif
+	// Check available byte count
+	DWORD dwError = 0UL;
+	COMSTAT comstat;
+	ClearCommError(hRs232c, &dwError, &comstat);
+	DWORD dwCount = comstat.cbInQue;
+	if (dwCount < count) {
+		return 0;
+	}
     // COMポートからデータ受信
     if(ReadFile(hRs232c, &recvbuf[offset], count, &dwSize, pOverlapped) == FALSE){
 #ifdef _DEBUG
