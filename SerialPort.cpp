@@ -195,7 +195,7 @@ int SerialPort::Read(void* buf, int offset, int count)
 	COMSTAT comstat;
 	ClearCommError(hRs232c, &dwError, &comstat);
 	DWORD dwCount = comstat.cbInQue;
-	if (dwCount < count) {
+	if (dwCount < (DWORD)count) {
 		return 0;
 	}
     // COMポートからデータ受信
