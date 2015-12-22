@@ -59,6 +59,7 @@ bool SerialPort::Open(int timeout/* = 0*/)
 
     // COMポートの設定変更
     dcb.BaudRate = baudrate;
+    dcb.fParity  = (parity == ParityNone) ? FALSE : TRUE;
     dcb.Parity   = (int)parity;
     dcb.StopBits = (int)stopbits;
     dcb.ByteSize = databits;
