@@ -189,6 +189,14 @@ int SerialPort::Read(void* buf, int offset, int count)
 		return 0;
 	}
 #endif
+	// Check available byte count
+	DWORD dwError = 0UL;
+	COMSTAT comstat;
+	ClearCommError(hRs232c, &dwError, &comstat);
+	DWORD dwCount = comstat.cbInQue;
+	if (dwCount < count) {
+		return 0;
+	}
     // COMポートからデータ受信
     if(ReadFile(hRs232c, &recvbuf[offset], count, &dwSize, pOverlapped) == FALSE){
 #ifdef _DEBUG
