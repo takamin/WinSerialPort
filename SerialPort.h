@@ -2,7 +2,7 @@
 #include <string>
 #pragma once
 //#define OVERLAPPED_IO
-class __declspec(dllexport) SerialPort
+class SerialPort
 {
 public:
 	enum Parity {

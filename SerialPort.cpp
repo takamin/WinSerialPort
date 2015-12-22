@@ -84,6 +84,7 @@ bool SerialPort::Open(int timeout/* = 0*/)
 	default:
 		break;
 	}
+
     if (SetCommState(hRs232c,&dcb) == FALSE){
 #ifdef _DEBUG
         cerr << "RS232C SetCommState Error" << endl;
