@@ -146,13 +146,18 @@ int SerialPort::Write(const void* buf, int offset, int count)
     memset(&ovWrite,0,sizeof(ovWrite));
 	pOverlapped = &ovWrite;
 #endif
-
-    if (WriteFile(hRs232c, &sendbuf[offset], count, &dwSize, pOverlapped) == FALSE) {
+	DWORD dwError = 0;
+	int i = 0;
+	while (i < count) {
+		if (WriteFile(hRs232c, &sendbuf[offset + i], count - i, &dwSize, pOverlapped) == FALSE) {
 #ifdef _DEBUG
-        cerr << "RS232C WriteFile Error" << endl;
+			DWORD dwError = GetLastError();
+			cerr << "RS232C WriteFile Error" << dwError << endl;
 #endif
-        return 0;
-    }
+			return i;
+		}
+		i += dwSize;
+	}
 	return (int)dwSize;
 }
 int SerialPort::Read(void* buf, int offset, int count)
