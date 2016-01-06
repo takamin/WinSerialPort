@@ -3,4 +3,5 @@ project( WinSerialPort )
 add_library(WinSerialPort
     SerialPort.cpp
     TimerThread.cpp
-    hexdump.cpp)
+    hexdump.cpp
+    CRC16CCITT.cpp)
