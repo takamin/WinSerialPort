@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include "C99_types.h"
 using namespace std;
 
 void hexdump(const void* p, size_t length) {
