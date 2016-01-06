@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "Thread.h"
 #include "SerialPort.h"
+#include "C99_types.h"
 
 class SerialPortReceiverThread : public Thread {
 public:
