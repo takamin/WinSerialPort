@@ -12,7 +12,7 @@ SerialPortReceiverThread::SerialPortReceiverThread(
 
 bool SerialPortReceiverThread::run()
 {
-	uint8_t data;
+	unsigned char data;
 	if (serialPort.IsOpen()) {
 		if (serialPort.Read(&data, 0, 1) == 1) {
 			this->onByteReceived(data);

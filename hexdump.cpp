@@ -24,7 +24,7 @@ void hexdump(const void* p, size_t length) {
 			cout << "----: -----------------------   -----------------------" << endl;
 		}
 		for (int col = 0; col < COLS && i < length; col++) {
-			uint8_t data = ((uint8_t*)p)[i++];
+			unsigned char data = ((unsigned char*)p)[i++];
 			if (col == 0) {
 				cout << hex << setw(4) << setfill('0') << i << ":";
 			}
@@ -34,7 +34,7 @@ void hexdump(const void* p, size_t length) {
 			else {
 				cout << " ";
 			}
-			cout << hex << setw(2) << setfill('0') << (uint16_t)data;
+			cout << hex << setw(2) << setfill('0') << (unsigned short)data;
 		}
 		cout << endl;
 		if (i % (COLS * ROWS) == 0 || i % COLS != 0) {

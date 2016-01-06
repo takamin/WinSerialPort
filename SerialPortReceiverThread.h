@@ -6,9 +6,8 @@
 
 class SerialPortReceiverThread : public Thread {
 public:
-	typedef void(*ON_BYTE_RECEIVED)(uint8_t data);
+	typedef void(*ON_BYTE_RECEIVED)(unsigned char data);
 public:
-	SerialPortReceiverThread() = delete;
 	SerialPortReceiverThread(SerialPort& serialPort, ON_BYTE_RECEIVED onByteReceived);
 protected:
 	virtual bool run();
