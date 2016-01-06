@@ -4,4 +4,6 @@ add_library(WinSerialPort
     SerialPort.cpp
     Thread.cpp
     SerialPortReceiverThread.cpp
-    hexdump.cpp)
+    CRC16CCITT.cpp
+    hexdump.cpp
+)
