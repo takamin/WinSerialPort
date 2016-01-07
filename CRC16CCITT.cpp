@@ -1,7 +1,9 @@
+#include <stdint.h>
 #include "C99_types.h"
 #include "CRC16CCITT.h"
 
 uint16_t CRC16CCITT::INITIAL_VALUE = 0xffff;
+
 /*
  * http://web.mit.edu/6.115/www/miscfiles/amulet/amulet-help/xmodem.htm
  */
