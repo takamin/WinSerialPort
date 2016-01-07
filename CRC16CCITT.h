@@ -1,4 +1,6 @@
+#include <stdint.h>
 #include "C99_types.h"
+
 class CRC16CCITT {
 public:
     static uint16_t INITIAL_VALUE;
