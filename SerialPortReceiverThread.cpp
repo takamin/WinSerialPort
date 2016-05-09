@@ -15,7 +15,7 @@ bool SerialPortReceiverThread::run()
 	unsigned char data;
 	if (serialPort.IsOpen()) {
 		if (serialPort.Read(&data, 0, 1) == 1) {
-			this->onByteReceived(data);
+			this->onByteReceived(data, serialPort);
 		}
 		else {
 			Sleep(10);

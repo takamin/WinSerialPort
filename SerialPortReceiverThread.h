@@ -6,7 +6,7 @@
 
 class SerialPortReceiverThread : public Thread {
 public:
-	typedef void(*ON_BYTE_RECEIVED)(unsigned char data);
+	typedef void(*ON_BYTE_RECEIVED)(unsigned char data, SerialPort& serialPort);
 public:
 	SerialPortReceiverThread(SerialPort& serialPort, ON_BYTE_RECEIVED onByteReceived);
 protected:
